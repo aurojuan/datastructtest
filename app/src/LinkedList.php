@@ -45,17 +45,20 @@ class LinkedList extends DoubleLinkedList
         }
     }
 
-    public function insertAfterLast(int $int)// this is made for queue
+    public function insertAfterLast(int $int)// this is only made for queue
     {
-        if ($this->lastNode == null) {
-            $newOne = new ListNode(0);
-            $this->lastNode = $newOne;
-            $this->headNode = $newOne;
-        } else {
-            $new = new ListNode($int);
+        $newNode = new ListNode($int);
 
-            $this->lastNode->next = $new;
-            $this->lastNode = $new;
+        if ($this->headNode == null) {
+            $this->headNode = $newNode;
+            $this->lastNode = $newNode;
+        } else {
+            $nowNode = $this->headNode;
+            while ($nowNode->next !== null) {
+                $nowNode = $nowNode->next;
+            }
+            $nowNode->next = $newNode;
+            $this->lastNode = $newNode;
         }
     }
 }

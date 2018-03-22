@@ -13,6 +13,6 @@ class QueueTest extends TestCase
         $juanqu->enqueue(12);
         $juanqu->enqueue(34);
         $juanqu->dequeue();
-        $this->assertEquals(4, $juanqu->getMeasureOfQueue());
+        $this->assertEquals(3, $juanqu->getMeasureOfQueue());
     }
 }
