@@ -2,10 +2,9 @@
 
 namespace DataStructure;
 
-use DataStructure\LinkedList;
 use DataStructure\ListNode;
 
-class CirLlist extends LinkedList
+class CirLlist
 {
     public $headNode = null;
     public $lastNode = null;
@@ -18,10 +17,10 @@ class CirLlist extends LinkedList
         for ($i=1; $i < $wantedNum; ++$i) {
             $new_node = new ListNode($array[$i]);
 
-            $new_node->pre = $temp;
             $temp->next = $new_node;
             printf("%d, ", $new_node->data);
             $temp = $new_node;
+
             if ($temp->next == null) {
                 $this->lastNode = $temp;
             }
@@ -29,24 +28,40 @@ class CirLlist extends LinkedList
         $this->lastNode->next =$this->headNode;
     }
 
-    /* other position can be done by extends method
-     */
     public function cllistInsertAfterLast(int $value): void
     {
-        $new_node = new ListNode($value);
+        $newNode = new ListNode($value);
 
-        $new_node->next = $this->headNnode;
-        $this->lastNode->next = $new_node;
-        $this->headNode = $new_node;
+        if ($this->headNode == null) {
+            $this->headNode = $newNode;
+        } else {
+            $nowNode = $this->headNode;
+            while ($nowNode->next !== $this->headNode) {
+                $nowNode = $nowNode->next;
+            }
+            $nowNode->next = $newNode;
+        }
+        $newNode->next = $this->headNode;
+        $this->lastNode = $newNode;
     }
 
-    /* other position can be done by extends method
-     */
     public function cllistDeleteHead(int $target): void
     {
         if ($this->headNode->data == $target) {
             $this->lastNode->next = $this->headNode->next;
             $this->headNode = $this->headNode->next;
         }
+    }
+
+    public function getMeasureOfCnodes(): int // we only deal with the case of more than 1 node here
+    {
+        $count=0;
+
+        $temp_node = $this->headNode;
+        while ($temp_node->next !== $this->headNode) {
+            $count += 1;
+            $temp_node = $temp_node->next;
+        }
+        return $count+1;
     }
 }
