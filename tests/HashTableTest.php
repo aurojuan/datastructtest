@@ -7,10 +7,7 @@ class HashTableTest extends TestCase
     public function testHSearch()
     {
         $find = new HashTable();
-        //$htable = [33,10,77,2,8,47,90,1];
-        // for ($i=0; $i < count($htable); $i++) {
-        //     $find->hInsert($htable[$i]);
-        // }
+
         $find->hInsert(33);
         $find->hInsert(10);
         $find->hInsert(77);
